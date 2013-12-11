@@ -387,7 +387,20 @@ treeJSON = d3.json("flare.json", function(error, treeData) {
             .attr("transform", function(d) {
                 return "translate(" + source.y0 + "," + source.x0 + ")";
             })
-            .on('click', click);
+            .on('click.1', click)
+            .on('click.2', function(d) {
+                console.log('bam! ', d);
+
+                var svgSelection = d3.select("svg");
+                //var circleSelection = d3.select("circle");
+                //d3.removeChild(circleSelection);
+
+                var circleSelection = svgSelection.append("circle")
+                                                  .attr("cx", d.x)
+                                                  .attr("cy", d.y - 10)
+                                                  .attr("r", 10)
+                                                  .style("fill", "lightsteelblue");
+            });
 
         nodeEnter.append("circle")
             .attr('class', 'nodeCircle')
